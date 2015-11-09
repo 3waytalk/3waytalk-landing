@@ -99,7 +99,7 @@
     &[data-valid]:focus,
     &[data-valid]:hover,
     &[data-valid]{
-        border-color: $darkgreen;
+        /* border-color: $darkgreen; */
         }
 
     &:hover {
