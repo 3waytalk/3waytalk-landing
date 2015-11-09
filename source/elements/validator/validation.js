@@ -16,6 +16,7 @@
             form.setAttribute("novalidate", "novalidate");
             form.addEventListener('submit', this.validate.bind(this));
             form.validate = this.validate.bind(this);
+            form.invalidate = this.invalidate.bind(this);
             form.clear = this.clear.bind(this);
 
             this.messages = {
@@ -106,6 +107,14 @@
             }
         }
 
+        invalidate(field_selector, custom_error) {
+            let element = this.form.querySelector(field_selector);
+            let invalid = document.createAttribute("data-invalid");
+            element.setAttributeNode(invalid);
+            element.removeAttribute('data-valid');
+            this.addError(element, custom_error, "custom");
+        }
+
         /**
          * @description Validate form
          * @param {Event} event - submit event
@@ -125,6 +134,11 @@
                 email_fields = this.form.querySelectorAll('input[type="email"]'),
                 url_regex = new RegExp("^(http|https|ftp)\://([a-zA-Z0-9\.\-]+(\:[a-zA-Z0-9\.&amp;%\$\-]+)*@)*((25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])|([a-zA-Z0-9\-]+\.)*[a-zA-Z0-9\-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(\:[0-9]+)*(/($|[a-zA-Z0-9\.\,\?\'\\\+&amp;%\$#\=~_\-]+))*$", "i"),
                 email_regex = new RegExp("^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$");
+
+            /* Remove custom errors */
+            [].forEach.call(this.form.querySelectorAll('[data-type-custom]'), (element) => {
+                element.parentNode.removeChild(element);
+            });
 
             /* check equal fields */
             [].forEach.call(equal_fields, (element) => {
@@ -177,7 +191,6 @@
                     this.clearError(element, 'email');
                 }
             });
-
 
             let all_fields = Array.prototype.slice.call(equal_fields).concat(
                 Array.prototype.slice.call(required_fields),

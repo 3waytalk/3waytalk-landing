@@ -28,7 +28,7 @@
 
             this.menu_popup_open = false;
 
-            this.login_button =             document.querySelector('.menu__login');
+            this.login_button =             document.querySelector('.menu__login_button');
             this.register_button =          document.querySelector('.menu__register');
 
             this.step1 =                    document.querySelector('.login_register-step-1');
@@ -60,12 +60,21 @@
             this.current = document.querySelector('.login_open');
             this.last = [];
 
-            this.login_button.addEventListener('click', this.openLoginForm.bind(this));
+            if(this.login_button) {
+              this.login_button.addEventListener('click', this.openLoginForm.bind(this));
+            }
+
             this.recovery_button.addEventListener('click', this.openRecovery.bind(this));
             this.lightbox.addEventListener('click', this.closeAll.bind(this));
             this.register_button.addEventListener('click', this.openRegister.bind(this));
-            this.header_login_button.addEventListener('click', this.openLoginOuter.bind(this));
-            this.header_register_button.addEventListener('click', this.openRegisterOuter.bind(this));
+
+            if(this.header_login_button) {
+              this.header_login_button.addEventListener('click', this.openLoginOuter.bind(this));
+            }
+            if (this.header_register_button) {
+              this.header_register_button.addEventListener('click', this.openRegisterOuter.bind(this));
+            }
+
             this.mobile_popup_close.addEventListener('click', this.closeMobilePopup.bind(this));
 
             this.recovery_form.addEventListener('submit', this.sendData.bind(this));
@@ -255,27 +264,31 @@
                 , xhr = new XMLHttpRequest()
                 , loaded
                 , index
+                , response
                 , data = new FormData(form);
 
                 if (this.step1_data != null) {
-                    data.append('from',     this.step1_data.from);
-                    data.append('to',       this.step1_data.to);
-                    data.append('location', this.step1_data.location);
-                    this.step1_data = null;
+                    data.append('fos_user_registration_form[translatorProfile][nativeLanguage]',     this.step1_data.from);
+                    data.append('fos_user_registration_form[translatorProfile][foreignLanguage]',       this.step1_data.to);
+                    data.append('fos_user_registration_form[country]', this.step1_data.location);
                 }
 
                 loaded = new Promise((resolve, reject) => {
                     xhr.open('POST', form.getAttribute('action'));
+                    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
                     xhr.send(data);
                     xhr.onreadystatechange = () => {
                         if (xhr.readyState === DONE) {
-                            setTimeout(()=>{this.clearAll();}, 500);
                             if (xhr.status === OK) {
+                                setTimeout(()=>{this.clearAll();}, 500);
+                                this.step1Data = null;
                                 resolve();
                             } else {
                                 reject({
                                     code: parseInt(xhr.status, 10),
-                                    message: xhr.statusText
+                                    message: xhr.statusText,
+                                    response: xhr.responseText,
+                                    form: form
                                 });
                             }
                         }
@@ -292,8 +305,6 @@
 
                 loaded.then(after_action).catch(this.showErrorMessage.bind(this));
                 // loaded.then(after_action).catch(after_action);
-
-                this.step1Data = null;
 
             } catch (err) {
                 console.log('error: ', err);
@@ -312,7 +323,8 @@
          * @description Show check email message
          */
         showCheckMessage () {
-            this.openForm(this.email);
+            this.last = new Array();
+            this.openForm(this.email, true);
         }
 
         /**
@@ -334,9 +346,38 @@
          * @description Show message
          */
         showErrorMessage (reason) {
-            this.last = new Array();
-            console.log(reason.code, 'Responce status code: ' + reason.code + '. ' + reason.message + '.');
-            this.error_message.open();
+            // this.last = new Array();
+            var message_text = null
+            , skip_popup = false
+            , form = this.current.querySelector('form');
+
+            var isset = function (fn) {
+                var value;
+                try {
+                    value = fn();
+                } catch (e) {
+                    value = undefined;
+                } finally {
+                    return value !== undefined;
+                }
+            };
+
+            if (reason.response) {
+                var response = JSON.parse(reason.response);
+                if (isset(() => response.error)) {
+                    message_text = response.error;
+                }
+                if (isset(() => response.content.form.children.email.errors)) {
+                    skip_popup = true;
+                    message_text = response.content.form.children.email.errors[0];
+                    form.invalidate('#fos_user_registration_form_email', message_text);
+                }
+            }
+            console.log(reason.code, 'Response status code: ' + reason.code + '. ' + reason.message + '.');
+
+            if(! skip_popup) {
+                this.error_message.open(message_text);
+            }
         }
 
         /**
