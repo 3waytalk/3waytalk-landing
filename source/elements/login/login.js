@@ -36,6 +36,8 @@
             this.step2 =                    document.querySelector('.login_register-step-2');
             this.step2_form =               document.querySelector('.login_register-step-2 form.login__form');
 
+            this.login_form =               document.querySelector('.login_login form.login__form');
+
             this.mobile_popup =             document.querySelector('.popup_mobile');
             this.mobile_popup_close =       this.mobile_popup.querySelector('.popup__close');
 
@@ -70,10 +72,23 @@
             this.password_form.addEventListener('submit', this.sendData.bind(this));
             this.step1_form.addEventListener('submit', this.openNext.bind(this));
             this.step2_form.addEventListener('submit', this.sendData.bind(this));
+            this.login_form.addEventListener('submit', this.sendData.bind(this));
 
             window.addEventListener('resize', this.reposPopup.bind(this));
 
-            $('.login select').select2();
+            $('select.language_from').select2();
+            $('select.language_to').select2();
+            $('select.language_location').select2();
+
+            this.language_from =        document.querySelector('.language_from');
+            this.language_to =          document.querySelector('.language_to');
+            this.language_location =    document.querySelector('.language_location');
+
+            $(".login select.language_from").on("change", this.changeFromLanguage.bind(this));
+
+            [].forEach.call(document.querySelectorAll('.login'), (element) => {
+                element.style.visibility = "visible";
+            });
 
             [].forEach.call(mobile_popup_buttons, (button) => {
                 button.addEventListener('click', this.openMobilePopup.bind(this));
@@ -108,11 +123,40 @@
             }
         }
 
+        changeFromLanguage () {
+            let value_from = this.language_from.value
+                , value_to = this.language_to.value;
+
+            if (value_from === value_to) {
+                this.language_to.selectedIndex = 0;
+                $(this.language_to).select2("val", "");
+            }
+
+            [].forEach.call(this.language_to.querySelectorAll('option[value][disabled]'), (to_enable)=>{
+                to_enable.removeAttribute('disabled');
+            });
+
+            [].forEach.call(this.language_to.querySelectorAll('option[value="' + value_from + '"]'), (to_disable)=>{
+                to_disable.setAttribute('disabled', 'disabled');
+            });
+
+            // inefficient, but it look lite there are no other way correctly disable/enable select2 dynamically
+            $(this.language_to).select2();
+        }
+
         openNext (event) {
             event.preventDefault();
+
+            this.step1_data = {
+                from: $('select.language_from').select2("val")
+                , to: $('select.language_to').select2("val")
+                , location: $('select.language_location').select2("val")
+            };
+
             if (this.step1_form.validate() == false) {
                 return;
             }
+
             this.openForm(this.step2);
         }
 
@@ -207,14 +251,25 @@
             try {
                 let DONE = 4
                 , OK = 200
-                , message
+                , after_action
                 , xhr = new XMLHttpRequest()
-                , loaded = new Promise((resolve, reject) => {
+                , loaded
+                , index
+                , data = new FormData(form);
+
+                if (this.step1_data != null) {
+                    data.append('from',     this.step1_data.from);
+                    data.append('to',       this.step1_data.to);
+                    data.append('location', this.step1_data.location);
+                    this.step1_data = null;
+                }
+
+                loaded = new Promise((resolve, reject) => {
                     xhr.open('POST', form.getAttribute('action'));
-                    xhr.send(new FormData(form));
+                    xhr.send(data);
                     xhr.onreadystatechange = () => {
                         if (xhr.readyState === DONE) {
-                            this.recovery_form.reset();
+                            setTimeout(()=>{this.clearAll();}, 500);
                             if (xhr.status === OK) {
                                 resolve();
                             } else {
@@ -227,18 +282,30 @@
                     };
                 });
 
-                if (form.hasAttribute('data-check')) {
-                    message = this.showCheckMessage.bind(this);
+                if (form.hasAttribute('data-success')) {
+                    after_action = this.redirectTo.bind(this, form.getAttribute('data-success'));
+                } else if (form.hasAttribute('data-check')) {
+                    after_action = this.showCheckMessage.bind(this);
                 } else {
-                    message = this.showSuccessMessage.bind(this);
+                    after_action = this.showSuccessMessage.bind(this);
                 }
 
-                loaded.then(message).catch(this.showErrorMessage.bind(this));
-                // loaded.then(message).catch(message);
+                loaded.then(after_action).catch(this.showErrorMessage.bind(this));
+                // loaded.then(after_action).catch(after_action);
+
+                this.step1Data = null;
 
             } catch (err) {
                 console.log('error: ', err);
             }
+        }
+
+
+        /**
+         * @description Redirect to url
+         */
+        redirectTo (url) {
+            document.location.href = url;
         }
 
         /**
@@ -345,13 +412,17 @@
             $.fn.fullpage.setKeyboardScrolling(false);
 
             var form = this.current.querySelector('form');
-            if ((form != null) && (typeof form.clear != 'undefined')) {
-                setTimeout(()=>{
-                    if (form!=null) {
-                        form.clear();
-                    }
-                }, 500);
-            }
+
+            // $('select.language_from').select2("val", "");
+            // $('select.language_to').select2("val", "");
+            // $('select.language_location').select2("val", "");
+            // if ((form != null) && (typeof form.clear != 'undefined')) {
+            //     setTimeout(()=>{
+            //         if (form!=null) {
+            //             form.clear();
+            //         }
+            //     }, 500);
+            // }
 
             if (typeof popup == "undefined" && this.last.length > 0) {
                 popup = this.last.pop();
@@ -362,14 +433,14 @@
                 this.last.push(this.current);
             }
 
-            form = popup.querySelector('form');
-            if (form != null) {
-                setTimeout(()=>{
-                    if (form!=null) {
-                        form.clear();
-                    }
-                }, 500);
-            }
+            // form = popup.querySelector('form');
+            // if (form != null) {
+            //     setTimeout(()=>{
+            //         if (form!=null) {
+            //             form.clear();
+            //         }
+            //     }, 500);
+            // }
 
             let props = {
                     right: - this.current.offsetWidth + "px"
@@ -426,9 +497,6 @@
             [].forEach.call(document.querySelectorAll('form'), (form) => {
                 form.clear();
             });
-
-            $('.login select').select2("destroy");
-            $('.login select').select2();
         }
 
         /**

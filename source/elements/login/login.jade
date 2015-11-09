@@ -2,14 +2,14 @@
     menu.login__navigation 
         button.login__back(type="button") Back
     include ../popup/browser.jade
-    form.login__form(action="/login/", method="post", enctype="multipart/form-data", data-reload=true)
+    form.login__form(action="/login/", method="post", enctype="multipart/form-data", data-success="https://3waytalk.com/")
         header.login__header
             h2.login__title Interpreter log in
         fieldset
             .login__line
-                input(type="email", name="email", value="", required="required", placeholder="Email")
+                input(type="email", name="email", value="", required="required", placeholder="Email", autocomplete="off")
             .login__line
-                input(type="password", name="password", value="", required="required", placeholder="Password")
+                input(type="password", name="password", value="", required="required", placeholder="Password", autocomplete="off")
             .login__line
                 button.login__submit(type="submit") Log in
             .login__line

@@ -23,12 +23,14 @@
                     required: "Required field"
                     , email: "Wrong email format"
                     , equal: "Password fields should be equal"
+                    , unequal: "Languages shouldn't be equal"
                     , url: "Wrong url format"
                 }
                 , ru: {
                     required: "Поле обязательно для заполнения"
                     , email: "Проверьте формат email"
                     , equal: "Пароли должны совпадать"
+                    , unequal: "Языки не должны совпадать"
                     , url: "Проверьте формат URL"
                 }
             };
@@ -39,12 +41,23 @@
          * @description Reset form and clear errors
          */
         clear () {
-            this.form.reset();
-            let selectors = $(this.form).find('select');
-            if (selectors.length > 0) {
-                selectors.select2("destroy");
-                selectors.select2();
+
+            let selects = $(this.form).find('select')
+                , index = selects.length;
+            while (index--) {
+
+                if(typeof selects[index].select2 != null) {
+                    $(selects[index]).select2("val", "");
+                } else {
+                    selects[index].selectedIndex = 0;
+                }
+
+                [].forEach.call(selects[index].querySelectorAll('option[value][disabled]'), (option) => {
+                    option.removeAttribute('disabled');
+                });
             }
+
+            this.form.reset();
 
             setTimeout(()=>{
                 let errors = document.querySelectorAll('.form-error'),
@@ -59,7 +72,7 @@
                     field.removeAttribute('data-valid');
                 });
 
-            },100);
+            }, 100);
         }
 
         /**
@@ -106,6 +119,7 @@
             let valid = true,
                 next = null,
                 equal_fields = this.form.querySelectorAll('[data-equal]'),
+                unequal_fields = this.form.querySelectorAll('[data-unequal]'),
                 required_fields = this.form.querySelectorAll('[required]'),
                 url_fields = this.form.querySelectorAll('input[type="url"]'),
                 email_fields = this.form.querySelectorAll('input[type="email"]'),
@@ -120,6 +134,17 @@
                     this.addError(element, this.messages[document.body.parentNode.getAttribute('lang')].equal, "equal");
                 } else {
                     this.clearError(element, "equal");
+                }
+            });
+
+            /* check unequal fields */
+            [].forEach.call(unequal_fields, (element) => {
+                let unequal = this.form.querySelector(element.getAttribute("data-unequal"));
+                if (element.options[element.selectedIndex].value.trim() == unequal.options[unequal.selectedIndex].value.trim()) {
+                    valid = false;
+                    this.addError(element, this.messages[document.body.parentNode.getAttribute('lang')].unequal, "unequal");
+                } else {
+                    this.clearError(element, "unequal");
                 }
             });
 

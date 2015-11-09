@@ -2,22 +2,22 @@
     menu.login__navigation 
         button.login__back(type="button") Back
     include ../popup/browser.jade
-    form.login__form(action="/password/", method="post", enctype="multipart/form-data", data-reload=true, id="registration_form")
+    form.login__form.login__form_registration-final(action="/password/", method="post", enctype="multipart/form-data", data-success="https://3waytalk.com/", id="registration_form")
         header.login__header
             h2.login__title Register as an interpreter
             h3.login__subtitle and start earning money
         fieldset
             .login__line
                 .login__line.login__line_half 
-                    input(type="text", name="name", value="", required="required", placeholder="First name")
+                    input(type="text", name="name", value="", required="required", placeholder="First name", autocomplete="off")
                 .login__line.login__line_half
-                    input(type="text", name="surname", value="", required="required", placeholder="Surname")
+                    input(type="text", name="surname", value="", required="required", placeholder="Surname", autocomplete="off")
                 p.login__warning Please enter your actual name. This information is used for payments
             .login__line
                 .login__line.login__line_half 
-                    input(type="email", name="email", value="", required="required", placeholder="Email")
+                    input(type="email", name="email", value="", required="required", placeholder="Email", autocomplete="off")
                 .login__line.login__line_half
-                    input(type="password", name="password", value="", required="required", placeholder="Password")
+                    input(type="password", name="password", value="", required="required", placeholder="Password", autocomplete="off")
             .login__line.login__line_navigation
                 button.login__submit(type="submit") Take a test
                 p.login__require *headset and microphone required

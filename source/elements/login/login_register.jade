@@ -2,29 +2,38 @@
     menu.login__navigation 
         button.login__back(type="button") Back
     include ../popup/browser.jade
+
     form.login__form(action="/password/", method="post", enctype="multipart/form-data", data-reload=true)
         header.login__header
             h2.login__title Register as an interpreter
             h3.login__subtitle and start earning money
+
         fieldset
             .login__line
+
                 .login__line.login__line_half 
-                    select(data-placeholder="Your native language", name="language", required="required", form="registration_form")
+                    select.language_from#primary(data-placeholder="Your native language", name="language", required="required")
                         option(selected, disabled)
                         option(value="ru") Russian
                         option(value="en") English
+                        option(value="it") Italian
+                        option(value="de") Deutch
+
                 .login__line.login__line_half
-                    select(data-placeholder="Your second language", name="second_language", required="required", form="registration_form")
+                    select.language_to(data-placeholder="Your second language", name="second_language", required="required", data-unequal="#primary")
                         option(selected, disabled)
                         option(value="ru") Russian
                         option(value="en") English
+                        option(value="it") Italian
+                        option(value="de") Deutch
+
             .login__line
-                select.login__select.login__select_wide(name="location", data-placeholder="Choose your location", required="required", form="registration_form")
+                select.language_location.login__select.login__select_wide(data-placeholder="Choose your location", name="location", required="required")
                     option(selected, disabled)
-                    option(value="ua") Ukraine
-                    option(value="ru") Russia
-                    option(value="en") USA
-                    option(value="is") Island
-                    option(value="ch") China
+                    option(value="ru") Russian
+                    option(value="en") English
+                    option(value="it") Italian
+                    option(value="de") Deutch
+
             .login__line.login__line_navigation
                 button.login__next(type="submit") Next

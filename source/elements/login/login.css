@@ -1,17 +1,27 @@
 @import "../../helpers/*.css";
 
+[aria-disabled="true"]{
+    opacity: 0.5;
+}
 
 @component login {
     position: absolute;
     top: 0;
     bottom: 0;
-    right: -300px;
+    right: -350px;
     width: 300px;
     background-color: $white;
     z-index: 102;
 
+    transform: translateZ(0);
     perspective-origin: 50% 0;
     perspective: 800;
+    visibility: hidden;
+
+    [aria-disabled="true"],
+    option[value][disabled] {
+        display: none;
+    }
 
     @modifier register {
         width: 540px;
