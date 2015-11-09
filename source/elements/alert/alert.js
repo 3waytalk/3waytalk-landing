@@ -14,13 +14,19 @@
             this.alert.querySelector('.alert__close').addEventListener('click', this.close.bind(this));
             this.alert.close = this.close.bind(this);
             this.alert.open = this.open.bind(this);
+            this.alert.text = alert.querySelector('.alert__text')
             this.status = false;
         }
 
-        close () {
+        close (event, status) {
             if (!this.status) {
                 return;
             }
+
+            if (status && this.status != status) {
+                return;
+            }
+
             Velocity(this.alert, "finish");
             Velocity(this.alert, {
                 translateY: 0
@@ -32,10 +38,20 @@
             });
         }
 
-        open () {
+        open (text) {
+            /*
             if (this.status) {
                 return;
             }
+            */
+
+            if (! text) {
+                text = 'Please check the credentials and try again.';
+            }
+            clearTimeout(this.alert);
+            this.alert.text.textContent = text;
+            this.status = new Date().getUTCMilliseconds();
+            var status = this.status;
 
             Velocity(this.alert, "finish");
             Velocity(this.alert, {
@@ -43,7 +59,9 @@
             }, {
                 duration: 250
                 , complete: ()=> {
-                    this.status = true;
+                    setTimeout(()=>{
+                        this.close(null, status);
+                    }, 3000);
                 }
             });
         }
