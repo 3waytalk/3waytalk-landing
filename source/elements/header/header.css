@@ -129,12 +129,12 @@
             border: 1px solid;
             background-size: 40px 40px;
             }
-        &_apple {
+        &_android {
             border-color: $green;
             background-image: url('../images/android.svg');
             background-position: 50% 50%;
             }
-        &_android {
+        &_apple {
             border-color: $blue;
             background-image: url('../images/apple.svg');
             background-position: 50% -1px;
