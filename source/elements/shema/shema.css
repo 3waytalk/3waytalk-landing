@@ -6,28 +6,28 @@
             opacity: 1;
             transform: scale(1);
             &:nth-child(1) {
-                transition: opacity .5s 1.5s, transform 1s 1.5s;
+                transition: opacity .25s .75s, transform .5s .75s;
                 }
             &:nth-child(3) {
-                transition: opacity .5s 2.5s, transform 1s 2.5s;
+                transition: opacity .25s 1.25s, transform .5s 1.25s;
                 }
             &:nth-child(5) {
-                transition: opacity .5s 1.5s, transform 1s 1.5s;
+                transition: opacity .25s .75s, transform .5s .75s;
                 }
             }
         &__message {
             opacity: 1;
             transform: scale(1);
             &_first {
-                transition: opacity .3s 4s, transform .5s 4s;
+                transition: opacity .15s 2s, transform .25s 2s;
                 }
             &_second {
-                transition: opacity .3s 4.5s, transform .5s 4.5s;
+                transition: opacity .15s 2.25s, transform .25s 2.25s;
                 }
             }
         &__connection {
             right: 12%;
-            transition: right 1.5s 3.5s linear;
+            transition: right .75s 1.75s linear;
             }
         }
     }
@@ -39,7 +39,7 @@
                 right: auto;
                 bottom: 50px;
                 opacity: 1;
-                transition: bottom 1.5s 3.5s linear, opacity 0s 3.5s;
+                transition: bottom 1.25s 1.75s linear, opacity 0s 1.75s;
                 }
             }
         }
@@ -60,7 +60,7 @@
         right: 12%;
 
         right: 88%;
-        transition: right 0s .75s;
+        transition: right 0s .35s;
 
         height: 1px;
         overflow: hidden;
@@ -96,7 +96,7 @@
         position: absolute;
         top: 77px;
 
-        transition: opacity 0s .75s, transform 0s .75s;
+        transition: opacity 0s .35s, transform 0s .35s;
         opacity: 0;
         transform: scale(.5);
 
@@ -130,7 +130,7 @@
         width: 33%;
         white-space: normal;
 
-        transition: opacity 0s .75s, transform 0s .75s;
+        transition: opacity 0s .35s, transform 0s .35s;
         opacity: 0;
         transform: scale(.5);
 
@@ -227,7 +227,7 @@
             opacity: 0;
 
             bottom: calc(100% - 50px);
-            transition: bottom 0s .5s, opacity 0s .5s;
+            transition: bottom 0s .25s, opacity 0s .25s;
 
             }
         @descendent message{

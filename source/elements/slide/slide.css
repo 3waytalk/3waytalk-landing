@@ -8,27 +8,28 @@ html body .landing__section.active_moment {
 
 html body .landing__section:first-child {
     opacity: 0;
-    transition: opacity 0s .75s;
+    transition: opacity 0s .35s;
     }
 
 html body .landing__section:last-child {
     opacity: 0;
-    transition: opacity 0s .75s;
+    transition: opacity 0s .35s;
     }
 
 .landing__section.active {
+
     &:last-child {
         opacity: 1;
-        transition: opacity 1s .75s;
+        transition: opacity .5s .35s;
         }
 
     &:first-child {
         opacity: 1;
-        transition: opacity 1s .75s;
+        transition: opacity .5s .35s;
         .slide{
             &__downloads {
                 opacity: 1;
-                transition: opacity 1s 1.75s;
+                transition: opacity 1s .9s;
                 }
             }
         }
@@ -36,41 +37,41 @@ html body .landing__section:last-child {
     .slide {
         &__title {
             opacity: 1;
-            transition: opacity 1s .75s;
+            transition: opacity .5s .35s;
         }
 
         &__text {
             opacity: 1;
-            transition: opacity 1s .75s;
+            transition: opacity .5s .35s;
         }
 
         &__downloads {
             opacity: 1;
-            transition: opacity 1s 1s;
+            transition: opacity .5s .5s;
         }
 
         &__footer {
             opacity: 1;
-            transition: opacity 1s 4.75s;
+            transition: opacity .5s 2.35s;
         }
 
         &_interpreter.slide {
             .interpreter {
                 left: 0;
                 opacity: 1;
-                transition: opacity 1s 1.75s, left 1s 1.75s;
+                transition: opacity .5s .9s, left .5s .9s;
             }
             .slide__resizable>.wave {
                 opacity: 1;
-                transition: opacity 1s 3.75s;
+                transition: opacity .5s 1.9s;
                 }
             .slide {
                 &__phone {
                     opacity: 1;
-                    transition: opacity 1s .75s;
+                    transition: opacity .5s .35s;
                     &_on {
                         opacity: 1;
-                        transition: opacity 1s 2.75s;
+                        transition: opacity .5s 1.35s;
                     }
                 }
             }
@@ -82,27 +83,27 @@ html body .landing__section:last-child {
                     &_left {
                         bottom: 0;
                         opacity: 1;
-                        transition: opacity 1s .75s, bottom 1s .75s;
+                        transition: opacity .5s .35s, bottom .5s .35s;
 
                         .steps__step.steps__step_one {
                             opacity: 1;
-                            transition: opacity 1.5s 1.5s;
+                            transition: opacity .75s .75s;
                             }
 
                         .steps__step.steps__step_two {
                             opacity: 1;
-                            transition: opacity 1.5s 2s;
+                            transition: opacity .75s 1s;
                             }
 
                         .steps__step.steps__step_three {
                             opacity: 1;
-                            transition: opacity 1.5s 2.5s;
+                            transition: opacity .75s 1.25s;
                             }
                     }
                     &_right {
                         top: 0;
                         opacity: 1;
-                        transition: opacity 1s .75s, top 1s .75s;
+                        transition: opacity .5s .35s, top .5s .35s;
                     }
                 }
             }
@@ -112,17 +113,17 @@ html body .landing__section:last-child {
             .interpreter.interpreter_bottom {
                 right: 0;
                 opacity: 1;
-                transition: opacity 1s 1.5s, right 1s 1.5s;
+                transition: opacity .5s .75s, right .5s .35s;
             }
             .interpreter.interpreter_top {
                 right: 0;
                 opacity: 1;
-                transition: opacity 1s 2.75s, right 1s 2.75s;
+                transition: opacity .5s 1.35s, right .5s .75s;
             }
             .slide {
                 &__phone {
                     opacity: 1;
-                    transition: opacity 1s .75s;
+                    transition: opacity .5s .35s;
                 }
             }
         }
@@ -130,21 +131,21 @@ html body .landing__section:last-child {
         &_main {
             .slide__scroll {
                 bottom: 20px;
-                transition: bottom .5s 3.25s;
+                transition: bottom .25s 1.65s;
                 }
             .menu {
                 right: 0;
-                transition: right .5s 2.75s;
+                transition: right .25s 1.65s;
                 }
             .slide {
                 &__downloads {
                     opacity: 1;
-                    transition: opacity 1s 1.75s;
+                    transition: opacity .5s .9s;
                     }
                 &__phone,
                 &__phones {
                     opacity: 1;
-                    transition: opacity 1s 1.75s;
+                    transition: opacity .5s .9s;
                 }
             }
         }
@@ -159,7 +160,7 @@ html body .landing__section:last-child {
                     &__phone_left {
                         top: 0;
                         bottom: auto;
-                        transition: opacity 1s .75s, top 1s .75s;
+                        transition: opacity .5s .35s, top .5s .35s;
                         }
                     }
                 }
@@ -176,17 +177,17 @@ html body .landing__section:last-child {
         font-weight: 200;
         margin: 0 0 20px;
 
-        transition: opacity 0s .75s;
+        transition: opacity 0s .35s;
         opacity: 0;
         }
 
     @descendent text {
-        transition: opacity 0s .75s;
+        transition: opacity 0s .35s;
         opacity: 0;
         }
 
     @descendent downloads {
-        transition: opacity 0s .75s;
+        transition: opacity 0s .35s;
         opacity: 0;
         }
 
@@ -214,7 +215,7 @@ html body .landing__section:last-child {
         color: $footer-grey;
         padding: 0 60px 0 20px;
         text-align: center;
-        transition: opacity 0s .75s;
+        transition: opacity 0s .35s;
         opacity: 0;
         p{
             line-height: 33px;
@@ -285,7 +286,7 @@ html body .landing__section:last-child {
         font-size: 16px;
 
         bottom: -60px;
-        transition: bottom 0s .75s;
+        transition: bottom 0s .35s;
         }
 
     @descendent resizable {
@@ -367,11 +368,11 @@ html body .landing__section:last-child {
         .slide{
             &__phones {
                 margin: 10px 0 0;
-                transition: opacity 0s .75s;
+                transition: opacity 0s .35s;
                 opacity: 0;
                 }
             &__phone {
-                transition: opacity 0s .75s;
+                transition: opacity 0s .35s;
                 opacity: 0;
                 }
             &__details {
@@ -459,7 +460,7 @@ html body .landing__section:last-child {
                 right: auto;
                 margin: 30px 0 0 0;
 
-                transition: opacity 0s .75s, left 0s .75s;
+                transition: opacity 0s .35s, left 0s .35s;
                 opacity: 0;
                 }
             }
@@ -472,7 +473,7 @@ html body .landing__section:last-child {
             margin: -325px auto auto;
             background: url("../images/phone-1.png") 50% 50% no-repeat;
             background-size: contain;
-            transition: opacity 0s .75s;
+            transition: opacity 0s .35s;
             opacity: 0;
 
             &_on {
@@ -481,7 +482,7 @@ html body .landing__section:last-child {
                 background: url("../images/phone-1-on.png") 50% 50% no-repeat;
                 background-size: contain;
 
-                transition: opacity 0s .75s;
+                transition: opacity 0s .35s;
                 opacity: 0;
                 }
             }
@@ -496,7 +497,7 @@ html body .landing__section:last-child {
             left: auto;
 
             right: 75px;
-            transition: opacity 0s .75s, right 0s .75s;
+            transition: opacity 0s .35s, right 0s .35s;
             opacity: 0;
             }
 
@@ -506,7 +507,7 @@ html body .landing__section:last-child {
             left: auto;
 
             right: 75px;
-            transition: opacity 0s .75s, right 0s .75s;
+            transition: opacity 0s .35s, right 0s .35s;
             opacity: 0;
             }
 
@@ -538,7 +539,7 @@ html body .landing__section:last-child {
             background: url("../images/phone-3.png") 50% 50% no-repeat;
             background-size: contain;
 
-            transition: opacity 0s .75s;
+            transition: opacity 0s .35s;
             opacity: 0;
             }
 
@@ -580,7 +581,7 @@ html body .landing__section:last-child {
                     z-index: 2;
 
 
-                    transition: opacity 0s .75s, bottom 0s .75s;
+                    transition: opacity 0s .35s, bottom 0s .35s;
                     opacity: 0;
                     bottom: -200px;
 
@@ -596,7 +597,7 @@ html body .landing__section:last-child {
                     margin: 0 0 0 -37px;
                     z-index: 1;
 
-                    transition: opacity 0s .75s, top 0s .75s;
+                    transition: opacity 0s .35s, top 0s .35s;
                     opacity: 0;
                     top: -200px;
 
@@ -971,7 +972,7 @@ html.ios body {
                             width: 400px;
                             height: 720px;
 
-                            transition: opacity 0s .75s, top 0s .75s;
+                            transition: opacity 0s .35s, top 0s .35s;
                             opacity: 0;
                             top: -200px;
                             }
@@ -1090,7 +1091,7 @@ html.ios body {
 
             * {
                 animation: none !important;
-                transition-delay: .75s !important;
+                transition-delay: .35s !important;
                 }
 
             &__title {

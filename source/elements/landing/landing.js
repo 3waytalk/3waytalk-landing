@@ -38,6 +38,7 @@
             $(".landing").fullpage({
                 sectionSelector: ".landing__section",
                 navigation: true,
+                scrollingSpeed: 350,
                 afterLoad: this.hideLoader.bind(this),
                 afterRender: this.recountSlides.bind(this),
                 afterResize: this.recountSlides.bind(this),

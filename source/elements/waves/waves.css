@@ -8,7 +8,7 @@
     width: 137px;
     height: 285px;
 
-    transition: opacity 0s .75s;
+    transition: opacity 0s .35s;
     opacity: 0;
 
     &_4 {
@@ -32,7 +32,7 @@
 
         transform: scale(.6, .6) translateX(30px);
 
-        animation: wave4 1s infinite linear;
+        animation: wave4 .5s infinite linear;
         }
 
     &_1 {
@@ -56,7 +56,7 @@
 
         transform: scale(1, 1) translateX(0);
 
-        animation: wave1 1s infinite linear;
+        animation: wave1 .5s infinite linear;
         }
 
     &_2 {
@@ -80,7 +80,7 @@
 
         transform: scale(1.6, 1.6) translateX(-20px);
 
-        animation: wave2 1s infinite linear;
+        animation: wave2 .5s infinite linear;
         }
 
     &_3 {
@@ -104,7 +104,7 @@
 
         transform: scale(2, 2) translateX(-35px);
 
-        animation: wave3 1s infinite linear;
+        animation: wave3 .5s infinite linear;
         }
     }
 
