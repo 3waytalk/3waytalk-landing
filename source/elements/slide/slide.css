@@ -711,7 +711,7 @@ html.ios body {
     }
 
 
-@media (min-width: 751px) and (max-width: 1200px) and (min-height: $textMode) {
+@media (min-width: 751px) and (max-width: 1020px) and (min-height: $textMode) {
     html body {
         @component slide {
             @descendent logotype {

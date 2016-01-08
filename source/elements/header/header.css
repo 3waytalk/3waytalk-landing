@@ -183,7 +183,7 @@ html.ios body {
         }
     }
 
-@media (max-width: 1200px) {
+@media (max-width: 980px) {
     @component header {
         @descendent interpreter {
             display: block;

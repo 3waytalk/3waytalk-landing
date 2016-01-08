@@ -136,7 +136,7 @@
         }
     }
 
-@media (max-width: 1200px) {
+@media (max-width: 980px) {
     html body {
         @component menu {
             height: auto;

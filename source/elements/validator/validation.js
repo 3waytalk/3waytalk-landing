@@ -25,6 +25,7 @@
                     , email: "Wrong email format"
                     , equal: "Password fields should be equal"
                     , unequal: "Languages shouldn't be equal"
+                    , unselected: "You should select value from dropdown"
                     , url: "Wrong url format"
                 }
                 , ru: {
@@ -32,6 +33,7 @@
                     , email: "Проверьте формат email"
                     , equal: "Пароли должны совпадать"
                     , unequal: "Языки не должны совпадать"
+                    , unselected: "Не выбрано значение из списка"
                     , url: "Проверьте формат URL"
                 }
             };
@@ -154,6 +156,13 @@
             /* check unequal fields */
             [].forEach.call(unequal_fields, (element) => {
                 let unequal = this.form.querySelector(element.getAttribute("data-unequal"));
+                
+                if (unequal.selectedIndex < 0 || element.selectedIndex < 0) {
+                    valid = false;
+                    this.addError(element, this.messages[document.body.parentNode.getAttribute('lang')].unselected, "unselected");
+                    return;
+                }
+
                 if (element.options[element.selectedIndex].value.trim() == unequal.options[unequal.selectedIndex].value.trim()) {
                     valid = false;
                     this.addError(element, this.messages[document.body.parentNode.getAttribute('lang')].unequal, "unequal");

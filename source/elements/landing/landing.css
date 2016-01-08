@@ -58,7 +58,7 @@ html body .fp-slidesNav ul li {
         }
     }
 
-@media (max-width: 1200px) {
+@media (max-width: 980px) {
     html body {
         #fp-nav.right{
             right: -200px;

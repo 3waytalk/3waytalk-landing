@@ -28,7 +28,8 @@
 
             this.menu_popup_open = false;
 
-            this.login_button =             document.querySelector('.menu__login_button');
+            this.login_button =             document.querySelector('.menu__login');
+            //this.login_button =             document.querySelector('.menu__login_button');
             this.register_button =          document.querySelector('.menu__register');
 
             this.step1 =                    document.querySelector('.login_register-step-1');
@@ -252,6 +253,8 @@
         sendData (event) {
             event.preventDefault();
             let form = event.currentTarget;
+            
+            console.log('sending');
 
             if (form.validate() == false) {
                 return;
@@ -535,6 +538,7 @@
         }
 
         clearAll () {
+            console.log('clearing');
             [].forEach.call(document.querySelectorAll('form'), (form) => {
                 form.clear();
             });
