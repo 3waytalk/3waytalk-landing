@@ -1,3 +1,66 @@
+4.4.1
+  - [Fix] ensure that IE 11 in compatibility mode doesn't throw (#370)
+  - [Docs] add missing shimmed things
+
+4.4.0
+  - [New] Detect and patch `RegExp#toString` in IE 8, which returns flags in the wrong order (#364)
+  - [Fix] Patch `Array#sort` on {Chrome, Safari, IE < 9, FF 4} that throws improperly, per ES5 (#354)
+  - [Fix] In IE 6, `window.external` makes `Object.keys` throw
+  - [Fix] `Array#slice`: boxed string access on IE <= 8 (#349)
+  - [Fix] `Array#join`: fix IE 6-8 join called on string literal (#352)
+  - [Fix] Ensure that `Error#message` and `Error#name` are non-enumerable (#358)
+  - [Fix: sham] `Object.getOwnPropertyDescriptor`: In Opera 11.6, `propertyIsEnumerable` is a nonshadowable global, like `toString`
+  - [Robustness] Use a bound form of `Array#slice.call`
+  - [Tests] Properly check for descriptor support in IE <= 8
+  - [Tests] on `node` `v5.1`
+  - [Tests] Add `Array#slice` tests (#346)
+  - [Dev Deps] update `uglify-js`, `eslint`, `jscs`, `uglify-js`, `semver`
+  - [Docs] Fix broken UMD links (#344)
+
+4.3.1
+  - [Fix] `String#split`: revert part of dcce96ae21185a69d2d40e67416e7496b73e8e47 which broke in older browsers (#342)
+  - [Dev Deps] update `eslint`, `@ljharb/eslint-config`, `jscs`
+  - [Tests] Firefox allows `Number#toPrecision` values of [1,100], which the spec permits
+
+4.3.0
+  - [New] `Array#push`: in IE <= 7, `Array#push` was not generic (#336)
+  - [New] `Array#push` in Opera `10.6` has a super weird bug when pushing `undefined`
+  - [New] `Array#join`: In IE <= 7, passing `undefined` didn't use the default separator (#333)
+  - [New] `Error#toString`: prints out the proper message in IE 7 and below (#334)
+  - [New] `Number#toPrecision`: IE 7 and below incorrectly throw when an explicit `undefined` precision is passed (#340)
+  - [Fix] `String#lastIndexOf`: ensure the correct length in IE 8
+  - [Fix] ensure `parseInt` accepts negative and plus-prefixed hex values (#332)
+  - [Robustness] Use a bound `Array#push` instead of relying on `Function#call`
+  - [Dev Deps] update `eslint`, `@ljharb/eslint-config`, `jscs`
+  - [Tests] Add some conditionals to avoid impossible-to-fix test failures in IE 6-8, due to it being unable to distinguish between `undefined` and an absent index (#114)
+  - [Tests] Fix false negatives in IE 6-8 with jasmine comparing arrays to arraylikes (#114)
+  - [Tests] add additional `Array#shift` tests (#337)
+  - [Tests] Add additional `Array#splice` tests (#339)
+  - [Tests] Add `Array#pop` tests, just in case (#338)
+  - [Tests] include `global` tests in HTML test files
+  - [Tests] Make sure the HTML tests run with the right charset
+  - [Tests] ensure `node` `v0.8` tests stay passing.
+  - [Tests] Prevent nondeterminism in the tests - this sometime produced values that are one ms off
+  - [Tests] on `node` `v5.0`
+  - [Tests] fix npm upgrades for older nodes
+
+4.2.0
+  - [shim: new] Overwrite `String#lastIndexOf` in IE 9, 10, 11, and Edge, so it has proper unicode support.
+  - [Dev Deps] update `eslint`, `jscs`
+
+4.1.15
+  - [shim: fix] new Date + Date.parse: Fix a Safari 8 & 9 bug where the `ms` arg is treated as a signed instead of unsigned int (#329)
+  - [shim: fix] add 'frame' to blacklisted keys (#330)
+  - [Dev Deps] update `eslint`, `@ljharb/eslint-config`, `jscs`, `uglify-js`
+  - [Tests] on `node` `v4.2`
+  - [Tests] Date: prevent nondeterminism in the tests - this sometime produced values that are one ms off
+
+4.1.14
+  - [shim: fix] Wrap more things in a try/catch, because IE sucks and sometimes throws on [[Get]] of window.localStorage (#327)
+  - [Refactor] Use `ES.ToUint32` instead of inline `>>>`
+  - [Tests] up to `node` `v4.1`
+  - [Dev Deps] update `eslint`, `@ljharb/eslint-config`, `semver`, `jscs`
+
 4.1.13
   - [shim: fix] Fix a bug where `Date(x)` threw instead of equalling `String(Date(x))` (#326)
 

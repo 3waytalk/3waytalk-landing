@@ -219,10 +219,10 @@
         </header>
         <fieldset>
           <div class="login__line"> 
-            <input id="password" type="password" name="password" value="" required="required" placeholder="Password"/>
+            <input id="password" type="password" name="password" value="" required="required" placeholder="Password" autocomplete="off"/>
           </div>
           <div class="login__line"> 
-            <input type="password" name="password_confirmation" value="" required="required" placeholder="Repeat password" data-equal="#password"/>
+            <input type="password" name="password_confirmation" value="" required="required" placeholder="Repeat password" data-equal="#password" autocomplete="off"/>
           </div>
           <div class="login__line">
             <button type="submit" class="login__submit">Confirm</button>
@@ -239,16 +239,16 @@
         <button type="button" class="popup__close"></button>
         <div class="popup__text">The supported browsers for interpreters to log in aare <a href="http://www.google.com/chrome/" target="_blank">Google Chrome</a> and <a href="http://www.mozilla.org/firefox/new/" target="_blank">Mozilla Firefox</a>. Please visit us again using one of thouse</div>
       </div>
-      <form action="/login/" method="post" enctype="multipart/form-data" data-reload="data-reload" class="login__form">
+      <form action="/login/" method="post" enctype="multipart/form-data" data-success="https://3waytalk.com/" class="login__form">
         <header class="login__header">
           <h2 class="login__title">Interpreter log in</h2>
         </header>
         <fieldset>
           <div class="login__line">
-            <input type="email" name="email" value="" required="required" placeholder="Email"/>
+            <input type="email" name="email" value="" required="required" placeholder="Email" autocomplete="off"/>
           </div>
           <div class="login__line">
-            <input type="password" name="password" value="" required="required" placeholder="Password"/>
+            <input type="password" name="password" value="" required="required" placeholder="Password" autocomplete="off"/>
           </div>
           <div class="login__line">
             <button type="submit" class="login__submit">Log in</button>
@@ -279,7 +279,7 @@
         </header>
         <fieldset>
           <div class="login__line"> 
-            <input type="email" name="email" value="" required="required" placeholder="Email"/>
+            <input type="email" name="email" value="" required="required" placeholder="Email" autocomplete="off"/>
           </div>
           <div class="login__line">
             <button type="submit" class="login__submit">Send</button>
@@ -312,28 +312,31 @@
         <fieldset>
           <div class="login__line">
             <div class="login__line login__line_half"> 
-              <select data-placeholder="Your native language" name="language" required="required" form="registration_form">
+              <select id="primary" data-placeholder="Your native language" name="language" required="required" class="language_from">
                 <option selected="selected" disabled="disabled"></option>
                 <option value="ru">Russian</option>
                 <option value="en">English</option>
+                <option value="it">Italian</option>
+                <option value="de">Deutch</option>
               </select>
             </div>
             <div class="login__line login__line_half">
-              <select data-placeholder="Your second language" name="second_language" required="required" form="registration_form">
+              <select data-placeholder="Your second language" name="second_language" required="required" data-unequal="#primary" class="language_to">
                 <option selected="selected" disabled="disabled"></option>
                 <option value="ru">Russian</option>
                 <option value="en">English</option>
+                <option value="it">Italian</option>
+                <option value="de">Deutch</option>
               </select>
             </div>
           </div>
           <div class="login__line">
-            <select name="location" data-placeholder="Choose your location" required="required" form="registration_form" class="login__select login__select_wide">
+            <select data-placeholder="Choose your location" name="location" required="required" class="language_location login__select login__select_wide">
               <option selected="selected" disabled="disabled"></option>
-              <option value="ua">Ukraine</option>
-              <option value="ru">Russia</option>
-              <option value="en">USA</option>
-              <option value="is">Island</option>
-              <option value="ch">China</option>
+              <option value="ru">Russian</option>
+              <option value="en">English</option>
+              <option value="it">Italian</option>
+              <option value="de">Deutch</option>
             </select>
           </div>
           <div class="login__line login__line_navigation">
@@ -350,7 +353,7 @@
         <button type="button" class="popup__close"></button>
         <div class="popup__text">The supported browsers for interpreters to log in aare <a href="http://www.google.com/chrome/" target="_blank">Google Chrome</a> and <a href="http://www.mozilla.org/firefox/new/" target="_blank">Mozilla Firefox</a>. Please visit us again using one of thouse</div>
       </div>
-      <form action="/password/" method="post" enctype="multipart/form-data" data-reload="data-reload" id="registration_form" class="login__form">
+      <form action="/password/" method="post" enctype="multipart/form-data" data-success="https://3waytalk.com/" id="registration_form" class="login__form login__form_registration-final">
         <header class="login__header">
           <h2 class="login__title">Register as an interpreter</h2>
           <h3 class="login__subtitle">and start earning money</h3>
@@ -358,19 +361,19 @@
         <fieldset>
           <div class="login__line">
             <div class="login__line login__line_half"> 
-              <input type="text" name="name" value="" required="required" placeholder="First name"/>
+              <input type="text" name="name" value="" required="required" placeholder="First name" autocomplete="off"/>
             </div>
             <div class="login__line login__line_half">
-              <input type="text" name="surname" value="" required="required" placeholder="Surname"/>
+              <input type="text" name="surname" value="" required="required" placeholder="Surname" autocomplete="off"/>
             </div>
             <p class="login__warning">Please enter your actual name. This information is used for payments</p>
           </div>
           <div class="login__line">
             <div class="login__line login__line_half"> 
-              <input type="email" name="email" value="" required="required" placeholder="Email"/>
+              <input type="email" name="email" value="" required="required" placeholder="Email" autocomplete="off"/>
             </div>
             <div class="login__line login__line_half">
-              <input type="password" name="password" value="" required="required" placeholder="Password"/>
+              <input type="password" name="password" value="" required="required" placeholder="Password" autocomplete="off"/>
             </div>
           </div>
           <div class="login__line login__line_navigation">

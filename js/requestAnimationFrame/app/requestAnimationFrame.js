@@ -71,7 +71,4 @@
 
     }
 
-
 } )( window );
-
-window.requestAnimFrame = window.requestAnimationFrame;

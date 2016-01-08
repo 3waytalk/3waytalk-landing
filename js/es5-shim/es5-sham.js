@@ -10,7 +10,7 @@
 ;
 
 // UMD (Universal Module Definition)
-// see https://github.com/umdjs/umd/blob/master/returnExports.js
+// see https://github.com/umdjs/umd/blob/master/templates/returnExports.js
 (function (root, factory) {
     'use strict';
 
@@ -29,10 +29,10 @@
   }
 }(this, function () {
 
-var call = Function.prototype.call;
+var call = Function.call;
 var prototypeOfObject = Object.prototype;
 var owns = call.bind(prototypeOfObject.hasOwnProperty);
-var propertyIsEnumerable = call.bind(prototypeOfObject.propertyIsEnumerable);
+var isEnumerable = call.bind(prototypeOfObject.propertyIsEnumerable);
 var toStr = call.bind(prototypeOfObject.toString);
 
 // If JS engine supports accessors creating shortcuts.
@@ -68,14 +68,14 @@ if (!Object.getPrototypeOf) {
             return proto;
         } else if (toStr(object.constructor) === '[object Function]') {
             return object.constructor.prototype;
-        } else if (!(object instanceof Object)) {
+        } else if (object instanceof Object) {
+          return prototypeOfObject;
+        } else {
           // Correctly return null for Objects created with `Object.create(null)`
           // (shammed or native) or `{ __proto__: null}`.  Also returns null for
           // cross-realm objects on browsers that lack `__proto__` support (like
           // IE <11), but that's the best we can do.
           return null;
-        } else {
-          return prototypeOfObject;
         }
     };
 }
@@ -131,7 +131,7 @@ if (!Object.getOwnPropertyDescriptor || getOwnPropertyDescriptorFallback) {
         // If object has a property then it's for sure `configurable`, and
         // probably `enumerable`. Detect enumerability though.
         descriptor = {
-            enumerable: propertyIsEnumerable(object, property),
+            enumerable: isEnumerable(object, property),
             configurable: true
         };
 
