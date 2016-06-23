@@ -219,6 +219,7 @@
                 left: auto;
                 float: left;
                 margin: 10px 0 10px 30px;
+                display: none;
                 }
             @descendent wrapper {
                 display: block;
