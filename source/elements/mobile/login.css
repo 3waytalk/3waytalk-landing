@@ -1,0 +1,25 @@
+@import "../../helpers/*.css";
+
+@component mobile {
+    @descendent login-button {
+        position: fixed;
+        left: 25px;
+        bottom: 25px;
+        padding: 12px 20px;
+        font-size: 16px;
+        background-color: #00bfff;
+        border-radius: 100px;
+        color: white;
+        }
+    }
+
+@media (max-width: 600px) {
+    html body {
+        @component login-button {
+            @descendent link{
+                left: 20px;
+                bottom: 20px;
+                }
+            }
+        }
+    }

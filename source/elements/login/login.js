@@ -101,7 +101,7 @@
             });
 
             [].forEach.call(mobile_popup_buttons, (button) => {
-                button.addEventListener('click', this.openMobilePopup.bind(this));
+                button.addEventListener('click', this.openLoginForm.bind(this));
             });
 
             [].forEach.call(back_buttons, (button) => {
