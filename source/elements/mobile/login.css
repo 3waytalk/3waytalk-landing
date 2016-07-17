@@ -10,13 +10,25 @@
         background-color: #00bfff;
         border-radius: 100px;
         color: white;
+        display: none;
+        cursor: pointer;
+        }
+    }
+    
+@media (max-width: 750px) {
+    html body {
+        @component mobile {
+            @descendent login-button{
+                display: block;
+                }
+            }
         }
     }
 
 @media (max-width: 600px) {
     html body {
-        @component login-button {
-            @descendent link{
+        @component mobile {
+            @descendent login-button{
                 left: 20px;
                 bottom: 20px;
                 }

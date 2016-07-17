@@ -24,7 +24,7 @@
 
             let back_buttons =              document.querySelectorAll('.login__back')
                 , login_buttons =           document.querySelectorAll('.login__login-button, .login_success .login__submit')
-                , mobile_popup_buttons =    document.querySelectorAll('.menu__interpreter, .header__interpreter');
+                , mobile_popup_buttons =    document.querySelectorAll('.menu__interpreter, .header__interpreter, .mobile__login-button');
 
             this.menu_popup_open = false;
 
@@ -112,8 +112,8 @@
                 button.addEventListener('click', this.openLoginInner.bind(this));
             });
 
-            this.WebRTCSupport = !document.documentElement.classList.contains('no-peerconnection');
-
+            // this.WebRTCSupport = !document.documentElement.classList.contains('no-peerconnection');
+            this.WebRTCSupport = true;
 
             if(!this.WebRTCSupport) {
 

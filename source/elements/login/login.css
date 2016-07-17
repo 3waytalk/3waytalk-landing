@@ -183,10 +183,3 @@
         vertical-align: middle;
         }
     }
-
-
-@media (max-height: 560px) {
-    @component login {
-            display: none;
-        }
-    }
