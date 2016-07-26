@@ -50,3 +50,8 @@ table {
 * {
 	outline-style: none;
 	}
+
+input, button {
+	-webkit-appearance: none !important;
+}
+
